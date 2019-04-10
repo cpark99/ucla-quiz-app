@@ -312,13 +312,16 @@ function showFinalResults() {
     resultDescription = 'A crying baby among babies!';
   }
     // append quiz results
+      // with reset link/button
     $('.quiz-content').append(`
       <div class="end-result">
         <p>You are a...</p>
         <h2>${resultTitle}</h3>
         <h4>${resultDescription}</h4>
         <p>Take the quiz again!</p>
-        <button type="submit" id="quiz-restart">Restart</button>
+        <form id="restart-button">
+          <button type="submit" class="restart-button">Restart</a>
+        </div>
       </div>
     `);
     console.log('`showFinalResults` ran');
@@ -351,17 +354,10 @@ function goToNextQuestion() {
   console.log('`goToNextQuestion` ran');
 }
 
-// User should be presented introduction content if clicked
-function restartQuiz() {
-
-  console.log('`restartQuiz` ran');
-}
-
 function runQuizApp() {
   startQuizOnClick();
   userSubmitAnswerChoice();
   goToNextQuestion();
-  restartQuiz();
   console.log('`runQuizApp` ran');
 }
 
