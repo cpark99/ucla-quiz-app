@@ -9,7 +9,7 @@ const questionList = [
     'choice-2': '1899',
     'choice-3': '1919',
     'choice-4': '1947',
-    correct: 2
+    correct: 3
   },
   {
     number: 2,
@@ -18,7 +18,7 @@ const questionList = [
     'choice-2': 'Royce Hall',
     'choice-3': 'John Wooden Center',
     'choice-4': 'Anderson',
-    correct: 1
+    correct: 2
   },
   {
     number: 3,
@@ -27,7 +27,7 @@ const questionList = [
     'choice-2': '5',
     'choice-3': '23',
     'choice-4': '11',
-    correct: 0
+    correct: 1
   },
   {
     number: 4,
@@ -36,7 +36,7 @@ const questionList = [
     'choice-2': '261',
     'choice-3': '145',
     'choice-4': '215',
-    correct: 1
+    correct: 2
   },
   {
     number: 5,
@@ -45,7 +45,7 @@ const questionList = [
     'choice-2': 'Beverly Hills',
     'choice-3': 'Westwood Village',
     'choice-4': 'Brentwood',
-    correct: 2
+    correct: 3
   },
   {
     number: 6,
@@ -54,7 +54,7 @@ const questionList = [
     'choice-2': 'Joe',
     'choice-3': 'Lady Bruin',
     'choice-4': 'Josephine',
-    correct: 3
+    correct: 4
   },
   {
     number: 7,
@@ -63,7 +63,7 @@ const questionList = [
     'choice-2': 'Invent the Internet',
     'choice-3': 'Surpass 100k undergraduate, freshman applicants',
     'choice-4': 'All of the above',
-    correct: 3
+    correct: 4
   },
   {
     number: 8,
@@ -72,7 +72,7 @@ const questionList = [
     'choice-2': 'USC',
     'choice-3': 'Stanford',
     'choice-4': 'Cal State Los Angeles',
-    correct: 1
+    correct: 2
   },
   {
     number: 9,
@@ -81,7 +81,7 @@ const questionList = [
     'choice-2': 'Community College',
     'choice-3': 'Public University',
     'choice-4': 'Private College',
-    correct: 2
+    correct: 3
   },
   {
     number: 10,
@@ -90,7 +90,7 @@ const questionList = [
     'choice-2': 'John R. Wooden Medical Center',
     'choice-3': 'UCLA University Hospital',
     'choice-4': 'John Wooden Health Center',
-    correct: 0
+    correct: 1
   }
 ];
 
@@ -102,15 +102,12 @@ function hideParentDiv(target) {
   console.log(`${target} is now hidden`);
 }
 
-function showQuizContent(target) {
+function showQuizContent(target, questionNumberStat, UserScoreStat) {
   // target parent, <section class="content-box">
   const targetElement = target.closest('section');
-  // Add <div class="user-stats" to current target
-    // start question at 1 (index 0)
-    // start score at 0
-  let questionNumberStat = 0;
-  let UserScoreStat = 0;
-  // add question 1 from questionList
+  // Add <div class="quiz-content" to current target
+  // add user stats
+  // add question from questionList
     // .number and .question keys for <h4>
     // each answer choice in respective <div>
     // show submit button
@@ -118,7 +115,7 @@ function showQuizContent(target) {
     <div class="quiz-content">
       <div class="user-stats">
         <div class="stats-question-number">
-          <p>Q: ${questionNumberStat}/10</p>
+          <p>Q: ${questionNumberStat+1}/10</p>
         </div>
         <div class="stats-score">
           <p>Score: ${UserScoreStat}</p>
@@ -150,17 +147,11 @@ function showQuizContent(target) {
             </label>
           </fieldset>
 
-          <button type="submit" id="submit-button">Submit</button>
+          <button type="submit" id="submit-answer">Submit</button>
         </form>
       </div>
     </div>
   `);
-  console.log('`showQuizContent` ran');
-}
-
-function submissionVerification() {
-  // verify that a choice was selected
-  // **
   console.log('`showQuizContent` ran');
 }
 
@@ -170,20 +161,58 @@ function startQuizOnClick() {
     const target = $(event.currentTarget);
     // hide parent .introduction <div>
     hideParentDiv(target);
-    // target .content-box
-    // add new html: <div class="quiz-content">
-    // add <div class="user-stats">
-    showQuizContent(target);
+    // show quiz content
+      // start question at 1 (index 0)
+      // start score at 0
+    showQuizContent(target, 0, 0);
+    // set event listener on new form
+    userSumbitAnswerChoice();
     console.log('`startQuizOnClick` ran');
   });
+}
+
+// User should update score
+function updateUserScore() {
+
+  console.log('`updateUserScore` ran');
+}
+
+function checkAnswerChoice(target) {
+  // get question number stat, assign to variable
+  console.log($())
+  const questionNumberStat = 0;
+  // get correct answer from questionList
+  const answerChoice = questionList[questionNumberStat].correct;
+  // if correct answer is chosen
+      // increase score by 1
+      // update score
+      // move to answer correct div
+  //console.log(target);
+  // $("input[value='2']");
+  console.log(answerChoice);
+  if ($(`#answer-choice-${answerChoice}`).prop("checked") == true) {
+    console.log('here');
+  } else {
+    console.log('not here');
+    // else move to answer incorrect div
+    // display correct answer
+  }
+
+  console.log('`checkAnswerChoice` ran');
 }
 
 // User should be able to submit selected answer
 function userSumbitAnswerChoice() {
   // listen for event submit
   // prevent default submission
-  //verify that an answer was checked
-
+  $('.quiz-form').on('submit', event => {
+    event.preventDefault();
+    // target quiz-form
+    const targetForm = $('.quiz-form');
+    // check if answer is correct or not
+    checkAnswerChoice(targetForm);
+  })
+  
   console.log('`userSumbitAnswerChoice` ran');
 }
 
@@ -191,12 +220,6 @@ function userSumbitAnswerChoice() {
 function updateQuestionNumber() {
 
   console.log('`updateQuestionNumber` ran');
-}
-
-// User should update score
-function updateUserScore() {
-
-  console.log('`updateUserScore` ran');
 }
 
 // User should be taken to new screen that displays:
@@ -233,7 +256,6 @@ function restartQuiz() {
 function runQuizApp() {
   startQuizOnClick();
   updateQuestionNumber();
-  updateUserScore();
   userSumbitAnswerChoice();
   displayAnswerResult();
   goToNextQuestion();
