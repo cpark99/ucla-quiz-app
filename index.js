@@ -279,25 +279,50 @@ function userSubmitAnswerChoice() {
   console.log('`userSubmitAnswerChoice` ran');
 }
 
-  // User should see final result page after last question
-    // User should see their score and a comment
-    // User should see a button to restart the quiz
-  function goToResultPage() {
-    
-    console.log('`goToResultPage` ran');
-  }
-
-function checkIfQuizComplete() {
+function removeAnswerResult() {
   // if current question number indexed on questionList is
   // undefined, then remove quiz content
-  if (questionList[currentQuestionNumber] === undefined) {
-    $('.quiz-content').remove();
-    // add final result content
-    goToResultPage();
-  }
-
-  console.log('`checkIfQuizComplete` ran');
+  $('.quiz-answer-result').remove();
+  console.log('`removeAnswerResult` ran');
 }
+
+// User should see final result page after last question
+  // User should see their score and a comment
+  // User should see a button to restart the quiz
+function showFinalResults() {
+  // result headers determined by UserScoreStat
+  let resultTitle = 'title';
+  let resultDescription = 'description';
+  if (UserScoreStat > 8) {
+    // set h2
+    resultTitle = 'TRUE BRUIN';
+    // set h4
+    resultDescription = 'A champion among champions!';
+  } else if (UserScoreStat > 6) {
+    resultTitle = 'LOYAL BRUIN';
+    resultDescription = 'A leader among followers!';
+  } else if (UserScoreStat > 3) {
+    resultTitle = 'BRUIN CUB';
+    resultDescription = 'Better than most, almost there!';
+  } else if (UserScoreStat > 0) {
+    resultTitle = 'BRUIN BABY';
+    resultDescription = 'How adorable... Try Harder!';
+  } else {
+    resultTitle = 'TROJAN';
+    resultDescription = 'A crying baby among babies!';
+  }
+    // append quiz results
+    $('.quiz-content').append(`
+      <div class="end-result">
+        <p>You are a...</p>
+        <h2>${resultTitle}</h3>
+        <h4>${resultDescription}</h4>
+        <p>Take the quiz again!</p>
+        <button type="submit" id="quiz-restart">Restart</button>
+      </div>
+    `);
+    console.log('`showFinalResults` ran');
+  }
 
 // User should be able to press next to go to next question
   // User should see question number updated
@@ -307,16 +332,22 @@ function goToNextQuestion() {
   $('.next-question').on('click', event => {
     console.log('clicked');
     // see if quiz is complete
-    checkIfQuizComplete();
-    const target = $(event.currentTarget).closest('div');
-    // increase question number counter by 1
-    currentQuestionNumber++;
-    console.log(`current question is ${currentQuestionNumber}`);
-    // display new quiz content
-    showQuizContent(target);
-    // re-initiate submit listening event
-    userSubmitAnswerChoice();
-  })
+    if (currentQuestionNumber < 9) {
+      // target .quiz-content
+      const target = $(event.currentTarget).closest('div');
+      // increase question number counter by 1
+      currentQuestionNumber++;
+      // display new quiz content
+      showQuizContent(target);
+      // re-initiate submit listening event
+      userSubmitAnswerChoice();
+    } else {
+      // remove .quiz-answer-result
+      removeAnswerResult();
+      // add final result content
+      showFinalResults();
+    }
+  });
   console.log('`goToNextQuestion` ran');
 }
 
@@ -330,7 +361,6 @@ function runQuizApp() {
   startQuizOnClick();
   userSubmitAnswerChoice();
   goToNextQuestion();
-  goToResultPage();
   restartQuiz();
   console.log('`runQuizApp` ran');
 }
