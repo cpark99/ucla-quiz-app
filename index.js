@@ -1,11 +1,120 @@
 'use strict';
 
+// create Array of Objects for questions and answers
+const questionList = [
+  {
+    number: 1,
+    question: 'What year was UCLA founded?',
+    'choice-1': '1936',
+    'choice-2': '1899',
+    'choice-3': '1919',
+    'choice-4': '1947',
+    correct: 3
+  },
+  {
+    number: 2,
+    question: 'This building is known as what?',
+    'choice-1': 'Powell Library',
+    'choice-2': 'Royce Hall',
+    'choice-3': 'John Wooden Center',
+    'choice-4': 'Anderson',
+    correct: 2
+  },
+  {
+    number: 3,
+    question: 'As of 2019, UCLA has how many Nobel Prize Winners?',
+    'choice-1': '14',
+    'choice-2': '5',
+    'choice-3': '23',
+    'choice-4': '11',
+    correct: 1
+  },
+  {
+    number: 4,
+    question: 'As on 2019, UCLA has how many Olympic medals?',
+    'choice-1': '190',
+    'choice-2': '261',
+    'choice-3': '145',
+    'choice-4': '215',
+    correct: 2
+  },
+  {
+    number: 5,
+    question: 'UCLA is located in which neighborhood?',
+    'choice-1': 'Santa Monica',
+    'choice-2': 'Beverly Hills',
+    'choice-3': 'Westwood Village',
+    'choice-4': 'Brentwood',
+    correct: 3
+  },
+  {
+    number: 6,
+    question: 'UCLA\'s female mascot has what name?',
+    'choice-1': 'Jacqueline',
+    'choice-2': 'Joe',
+    'choice-3': 'Lady Bruin',
+    'choice-4': 'Josephine',
+    correct: 4
+  },
+  {
+    number: 7,
+    question: 'UCLA was the first to accomplish which feat?',
+    'choice-1': 'Reach 100 national team championships',
+    'choice-2': 'Invent the Internet',
+    'choice-3': 'Surpass 100k undergraduate, freshman applicants',
+    'choice-4': 'All of the above',
+    correct: 4
+  },
+  {
+    number: 8,
+    question: 'What is the name of UCLA\'s cross-town rival?',
+    'choice-1': 'UC Berkeley',
+    'choice-2': 'USC',
+    'choice-3': 'Stanford',
+    'choice-4': 'Cal State Los Angeles',
+    correct: 2
+  },
+  {
+    number: 9,
+    question: 'UCLA is a...',
+    'choice-1': 'Private University',
+    'choice-2': 'Community College',
+    'choice-3': 'Public University',
+    'choice-4': 'Private College',
+    correct: 3
+  },
+  {
+    number: 10,
+    question: 'UCLA\'s World-renown medical center is called the...',
+    'choice-1': 'Ronald Reagan Medical Center',
+    'choice-2': 'John R. Wooden Medical Center',
+    'choice-3': 'UCLA University Hospital',
+    'choice-4': 'John Wooden Health Center',
+    correct: 1
+  }
+];
+
 // User is presented with introduction content
+
+function hideParentDiv(target) {
+  target.closest('div').addClass('hidden');
+
+  console.log(`${target} is now hidden`);
+}
 
 // User should press Start to begin quiz
 function startQuizOnClick() {
+  $('.introduction').on('click', '#start-quiz-button', event => {
+    const target = $(event.currentTarget);
+    // hide .introduction <div>
+    hideParentDiv(target);
+    // add new <div class="quiz-content">
+    // add <div class="user-stats">
+    // start question at 1
+    // start score at 0
 
-  console.log('`startQuizOnClick` ran');
+    console.log('`startQuizOnClick` ran');
+  });
 }
 
 // User should have question number start at 1
