@@ -98,7 +98,6 @@ const questionList = [
 
 function hideParentDiv(target) {
   target.closest('div').addClass('hidden');
-
   console.log(`${target} is now hidden`);
 }
 
@@ -261,6 +260,8 @@ function checkAnswerChoice(target) {
     console.log('answer incorrect');
     displayIncorrect();
   }
+  // re-initiate next click listening event
+  goToNextQuestion();
   console.log('`checkAnswerChoice` ran');
 }
 
@@ -278,21 +279,45 @@ function userSubmitAnswerChoice() {
   console.log('`userSubmitAnswerChoice` ran');
 }
 
-// User should be able to press next to go to next question
-function goToNextQuestion() {
+  // User should see final result page after last question
+    // User should see their score and a comment
+    // User should see a button to restart the quiz
+  function goToResultPage() {
+    
+    console.log('`goToResultPage` ran');
+  }
 
-  console.log('`goToNextQuestion` ran');
+function checkIfQuizComplete() {
+  // if current question number indexed on questionList is
+  // undefined, then remove quiz content
+  if (questionList[currentQuestionNumber] === undefined) {
+    $('.quiz-content').remove();
+    // add final result content
+    goToResultPage();
+  }
+
+  console.log('`checkIfQuizComplete` ran');
 }
 
-// User should see question number updated
-// User should see next question
-
-// User should see final result page after last question
-// User should see their score and a comment
-// User should see a button to restart the quiz
-function goToResultPage() {
-
-  console.log('`goToResultPage` ran');
+// User should be able to press next to go to next question
+  // User should see question number updated
+  // User should see next question
+function goToNextQuestion() {
+  // listen for next click event
+  $('.next-question').on('click', event => {
+    console.log('clicked');
+    // see if quiz is complete
+    checkIfQuizComplete();
+    const target = $(event.currentTarget).closest('div');
+    // increase question number counter by 1
+    currentQuestionNumber++;
+    console.log(`current question is ${currentQuestionNumber}`);
+    // display new quiz content
+    showQuizContent(target);
+    // re-initiate submit listening event
+    userSubmitAnswerChoice();
+  })
+  console.log('`goToNextQuestion` ran');
 }
 
 // User should be presented introduction content if clicked
