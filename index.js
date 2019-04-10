@@ -9,7 +9,7 @@ const questionList = [
     'choice-2': '1899',
     'choice-3': '1919',
     'choice-4': '1947',
-    correct: 3
+    correct: 2
   },
   {
     number: 2,
@@ -18,7 +18,7 @@ const questionList = [
     'choice-2': 'Royce Hall',
     'choice-3': 'John Wooden Center',
     'choice-4': 'Anderson',
-    correct: 2
+    correct: 1
   },
   {
     number: 3,
@@ -27,7 +27,7 @@ const questionList = [
     'choice-2': '5',
     'choice-3': '23',
     'choice-4': '11',
-    correct: 1
+    correct: 0
   },
   {
     number: 4,
@@ -36,7 +36,7 @@ const questionList = [
     'choice-2': '261',
     'choice-3': '145',
     'choice-4': '215',
-    correct: 2
+    correct: 1
   },
   {
     number: 5,
@@ -45,7 +45,7 @@ const questionList = [
     'choice-2': 'Beverly Hills',
     'choice-3': 'Westwood Village',
     'choice-4': 'Brentwood',
-    correct: 3
+    correct: 2
   },
   {
     number: 6,
@@ -54,7 +54,7 @@ const questionList = [
     'choice-2': 'Joe',
     'choice-3': 'Lady Bruin',
     'choice-4': 'Josephine',
-    correct: 4
+    correct: 3
   },
   {
     number: 7,
@@ -63,7 +63,7 @@ const questionList = [
     'choice-2': 'Invent the Internet',
     'choice-3': 'Surpass 100k undergraduate, freshman applicants',
     'choice-4': 'All of the above',
-    correct: 4
+    correct: 3
   },
   {
     number: 8,
@@ -72,7 +72,7 @@ const questionList = [
     'choice-2': 'USC',
     'choice-3': 'Stanford',
     'choice-4': 'Cal State Los Angeles',
-    correct: 2
+    correct: 1
   },
   {
     number: 9,
@@ -81,7 +81,7 @@ const questionList = [
     'choice-2': 'Community College',
     'choice-3': 'Public University',
     'choice-4': 'Private College',
-    correct: 3
+    correct: 2
   },
   {
     number: 10,
@@ -90,7 +90,7 @@ const questionList = [
     'choice-2': 'John R. Wooden Medical Center',
     'choice-3': 'UCLA University Hospital',
     'choice-4': 'John Wooden Health Center',
-    correct: 1
+    correct: 0
   }
 ];
 
@@ -102,50 +102,101 @@ function hideParentDiv(target) {
   console.log(`${target} is now hidden`);
 }
 
+function showQuizContent(target) {
+  // target parent, <section class="content-box">
+  const targetElement = target.closest('section');
+  // Add <div class="user-stats" to current target
+    // start question at 1 (index 0)
+    // start score at 0
+  let questionNumberStat = 0;
+  let UserScoreStat = 0;
+  // add question 1 from questionList
+    // .number and .question keys for <h4>
+    // each answer choice in respective <div>
+    // show submit button
+  targetElement.html(`
+    <div class="quiz-content">
+      <div class="user-stats">
+        <div class="stats-question-number">
+          <p>Q: ${questionNumberStat}/10</p>
+        </div>
+        <div class="stats-score">
+          <p>Score: ${UserScoreStat}</p>
+        </div>
+      </div>
+
+      <div class="quiz-form-parent">
+        <form class="quiz-form">
+          <fieldset>
+            <legend class="quiz-question">
+              <h4>${questionList[questionNumberStat].number}. 
+              ${questionList[questionNumberStat].question}</h4>
+            </legend>
+            <label class="answer-choice">
+              <input type="radio" name="answer-choice" id="answer-choice-1" value="0">
+              <label for="answer-choice-1">${questionList[questionNumberStat]['choice-1']}</label>
+            </label>
+            <label class="answer-choice">
+              <input type="radio" name="answer-choice" id="answer-choice-2" value="1">
+              <label for="answer-choice-2">${questionList[questionNumberStat]['choice-2']}</label>
+            </label>
+            <label class="answer-choice">
+              <input type="radio" name="answer-choice" id="answer-choice-3" value="2">
+              <label for="answer-choice-3">${questionList[questionNumberStat]['choice-3']}</label>
+            </label>
+            <label class="answer-choice" for="answer-choice-4">
+              <input type="radio" name="answer-choice" id="answer-choice-4" value="3">
+              <label for="answer-choice-4">${questionList[questionNumberStat]['choice-4']}</label>
+            </label>
+          </fieldset>
+
+          <button type="submit" id="submit-button">Submit</button>
+        </form>
+      </div>
+    </div>
+  `);
+  console.log('`showQuizContent` ran');
+}
+
+function submissionVerification() {
+  // verify that a choice was selected
+  // **
+  console.log('`showQuizContent` ran');
+}
+
 // User should press Start to begin quiz
 function startQuizOnClick() {
-  $('.introduction').on('click', '#start-quiz-button', event => {
+  $('.js-introduction').on('click', '#start-quiz-button', event => {
     const target = $(event.currentTarget);
-    // hide .introduction <div>
+    // hide parent .introduction <div>
     hideParentDiv(target);
-    // add new <div class="quiz-content">
+    // target .content-box
+    // add new html: <div class="quiz-content">
     // add <div class="user-stats">
-    // start question at 1
-    // start score at 0
-
+    showQuizContent(target);
     console.log('`startQuizOnClick` ran');
   });
 }
 
-// User should have question number start at 1
+// User should be able to submit selected answer
+function userSumbitAnswerChoice() {
+  // listen for event submit
+  // prevent default submission
+  //verify that an answer was checked
+
+  console.log('`userSumbitAnswerChoice` ran');
+}
+
+// User should update question number
 function updateQuestionNumber() {
 
   console.log('`updateQuestionNumber` ran');
 }
 
-// User should have score set to 0
+// User should update score
 function updateUserScore() {
 
   console.log('`updateUserScore` ran');
-}
-
-// User should be presented with a new screen:
-// contains question number, score, and quiz question 1
-function displayQuizContent() {
-
-  console.log('`displayQuizContent` ran');
-}
-
-// User should be able to check an answer choice
-function userCheckAnswerChoice() {
-
-  console.log('`userCheckAnswerChoice` ran');
-}
-
-// User should be able to submit selected answer
-function userSumbitAnswerChoice() {
-
-  console.log('`userSumbitAnswerChoice` ran');
 }
 
 // User should be taken to new screen that displays:
@@ -183,8 +234,6 @@ function runQuizApp() {
   startQuizOnClick();
   updateQuestionNumber();
   updateUserScore();
-  displayQuizContent();
-  userCheckAnswerChoice();
   userSumbitAnswerChoice();
   displayAnswerResult();
   goToNextQuestion();
