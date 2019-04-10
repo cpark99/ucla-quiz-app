@@ -61,7 +61,7 @@ const questionList = [
     question: 'UCLA was the first to accomplish which feat?',
     'choice-1': 'Reach 100 national team championships',
     'choice-2': 'Invent the Internet',
-    'choice-3': 'Surpass 100k undergraduate, freshman applicants',
+    'choice-3': 'Surpass 100k freshman applicants',
     'choice-4': 'All of the above',
     correct: 4
   },
@@ -134,19 +134,19 @@ function showQuizContent(target) {
               <h4>${questionList[currentQuestionNumber].number}. 
               ${questionList[currentQuestionNumber].question}</h4>
             </legend>
-            <label class="answer-choice">
+            <label class="answer-choice choice-1">
               <input type="radio" name="answer-choice" id="answer-choice-1" value="0">
               <label for="answer-choice-1">${questionList[currentQuestionNumber]['choice-1']}</label>
             </label>
-            <label class="answer-choice">
+            <label class="answer-choice choice-2">
               <input type="radio" name="answer-choice" id="answer-choice-2" value="1">
               <label for="answer-choice-2">${questionList[currentQuestionNumber]['choice-2']}</label>
             </label>
-            <label class="answer-choice">
+            <label class="answer-choice choice-3">
               <input type="radio" name="answer-choice" id="answer-choice-3" value="2">
               <label for="answer-choice-3">${questionList[currentQuestionNumber]['choice-3']}</label>
             </label>
-            <label class="answer-choice" for="answer-choice-4">
+            <label class="answer-choice choice-4" for="answer-choice-4">
               <input type="radio" name="answer-choice" id="answer-choice-4" value="3">
               <label for="answer-choice-4">${questionList[currentQuestionNumber]['choice-4']}</label>
             </label>
@@ -213,7 +213,7 @@ function showIncorrectContent(target) {
       <div class="answer-incorrect">
         <h3>Incorrect!</h3>
         <div class="answer-image answer-incorrect-image"></div>
-        <div class="showCorrectAnswer">
+        <div class="show-correct-answer">
           <h5>Answer:</h5>
           <p>${questionIndex[`choice-${questionIndex.correct}`]}</p>
         </div>

@@ -42,6 +42,10 @@ body {
   margin-bottom: 10px;
 }
 
+footer {
+  font-style: italic;
+}
+
 .image-bottom-half {
   border: 1px solid black;
   height: 100px;
@@ -137,10 +141,24 @@ fieldset {
   background-color: lightgrey;
 }
 
+.answer-correct h5 {
+  font-size: 16px;
+  margin: 15px auto 15px auto;
+}
+
 .next-question {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   height: 30px;
   width: 80px;
+}
+
+.show-correct-answer h5 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.show-correct-answer p {
+  margin-top: 10px;
 }
 
 /* Final result contents */
@@ -156,7 +174,7 @@ fieldset {
 }
 
 @media (min-width: 360px)
-and (max-width: 768px) {
+and (max-width: 767px) {
   .container {
     width: 350px;
   }
@@ -175,7 +193,7 @@ and (max-width: 768px) {
 
 }
 
-@media (min-width: 769px) 
+@media (min-width: 768px) 
 and (max-width: 1224px) {
   .container {
     width: 700px;
@@ -193,6 +211,26 @@ and (max-width: 1224px) {
     font-size: 20px;
   }
 
+  .quiz-answer-result {
+    width: 300px;
+  }
+
+  .quiz-answer-result h3 {
+    font-size: 22px;
+  }
+  
+  .answer-image {
+    width: 130px;
+    height: 130px;
+  }
+
+  .answer-correct h5 {
+    font-size: 20px;
+  }
+
+  .show-correct-answer h5 {
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 1225px) {
@@ -205,21 +243,23 @@ and (max-width: 1224px) {
   }
 
   .introduction h3 {
-    font-size: 24px;
+    font-size: 30px;
+    margin: 100px auto 40px auto;
   }
 
   .introduction p {
     font-size: 20px;
+    margin-bottom: 30px;
   }
-  
-  footer {
-    clear: both;
+
+  #start-quiz-button {
+    margin-top: 20px;
   }
 
   /* Question contents */
 
   .content-box {
-    height: 320px;
+    height: 410px;
   }
 
   .answer-choice {
@@ -238,5 +278,45 @@ and (max-width: 1224px) {
 
   #submit-button {
     margin: 0 0 0 0;
+  }
+
+  .quiz-answer-result {
+    width: 400px;
+  }
+  .quiz-answer-result h3 {
+    font-size: 24px;
+  }
+  
+  .answer-image {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .answer-correct h5 {
+    font-size: 22px;
+  }
+  
+  .show-correct-answer h5 {
+    font-size: 20px;
+  }
+
+  .end-result {
+    padding-top: 10px;
+  }
+
+  .end-result p {
+    font-size: 20px;
+  }
+
+  .end-result h2 {
+    font-size: 32px;
+  }
+
+  .end-result h4 {
+    font-size: 24px;
+  }
+
+  #restart-button {
+    margin-top: 40px;
   }
 }
