@@ -132,6 +132,8 @@ fieldset {
 
 .next-question {
   margin-bottom: 5px;
+  height: 30px;
+  width: 80px;
 }
 
 /* Final result contents */

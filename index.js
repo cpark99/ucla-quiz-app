@@ -105,8 +105,11 @@ function hideParentDiv(target) {
 // start the quiz at question 1 (index 0)
   // this value increments by 1 every new question
 let currentQuestionNumber = 0;
+// start user score at 0
+  // will increment by 1 if question is answered correctly
+let UserScoreStat = 0;
 
-function showQuizContent(target, questionNumberStat, UserScoreStat) {
+function showQuizContent(target) {
   // target parent, <section class="content-box">
   const targetElement = target.closest('section');
   // Add <div class="quiz-content" to current target
@@ -119,10 +122,10 @@ function showQuizContent(target, questionNumberStat, UserScoreStat) {
     <div class="quiz-content">
       <div class="user-stats">
         <div class="stats-question-number">
-          <p>Q: ${questionNumberStat+1}/10</p>
+          <p>Q: ${currentQuestionNumber+1}/10</p>
         </div>
         <div class="stats-score">
-          <p>Score: ${UserScoreStat}</p>
+          <p class="stats-score-text">Score: ${UserScoreStat}</p>
         </div>
       </div>
 
@@ -130,24 +133,24 @@ function showQuizContent(target, questionNumberStat, UserScoreStat) {
         <form class="quiz-form">
           <fieldset>
             <legend class="quiz-question">
-              <h4>${questionList[questionNumberStat].number}. 
-              ${questionList[questionNumberStat].question}</h4>
+              <h4>${questionList[currentQuestionNumber].number}. 
+              ${questionList[currentQuestionNumber].question}</h4>
             </legend>
             <label class="answer-choice">
               <input type="radio" name="answer-choice" id="answer-choice-1" value="0">
-              <label for="answer-choice-1">${questionList[questionNumberStat]['choice-1']}</label>
+              <label for="answer-choice-1">${questionList[currentQuestionNumber]['choice-1']}</label>
             </label>
             <label class="answer-choice">
               <input type="radio" name="answer-choice" id="answer-choice-2" value="1">
-              <label for="answer-choice-2">${questionList[questionNumberStat]['choice-2']}</label>
+              <label for="answer-choice-2">${questionList[currentQuestionNumber]['choice-2']}</label>
             </label>
             <label class="answer-choice">
               <input type="radio" name="answer-choice" id="answer-choice-3" value="2">
-              <label for="answer-choice-3">${questionList[questionNumberStat]['choice-3']}</label>
+              <label for="answer-choice-3">${questionList[currentQuestionNumber]['choice-3']}</label>
             </label>
             <label class="answer-choice" for="answer-choice-4">
               <input type="radio" name="answer-choice" id="answer-choice-4" value="3">
-              <label for="answer-choice-4">${questionList[questionNumberStat]['choice-4']}</label>
+              <label for="answer-choice-4">${questionList[currentQuestionNumber]['choice-4']}</label>
             </label>
           </fieldset>
 
@@ -166,19 +169,40 @@ function startQuizOnClick() {
     // hide parent .introduction <div>
     hideParentDiv(target);
     // show quiz content
-      // start question at 1 (index 0)
-      // start score at 0
-    showQuizContent(target, currentQuestionNumber, 0);
+    showQuizContent(target);
     // set event listener on new form
     userSubmitAnswerChoice();
     console.log('`startQuizOnClick` ran');
   });
 }
 
-// User should update score
-function updateUserScore() {
+function showCorrectContent(target) {
+  // append div .quiz-answer-result
+    // includes div .answer-correct
+    target.append(`
+    <div class="quiz-answer-result">
+      <div class="answer-correct">
+        <h3>Correct!</h3>
+        <div class="answer-correct-image"></div>
+        <button class="next-question">Next</button>
+      </div>
+    </div>
+    `);
+  console.log('`showCorrectContent` ran');
+}
 
-  console.log('`updateUserScore` ran');
+function displayCorrect() {
+  // target form parent div
+    // remove div .quiz-form-parent
+  $('.quiz-form-parent').remove();
+  // target div .stats-score
+    // update score <p>
+  $('.stats-score-text').text(`Score: ${UserScoreStat}`);
+  // target div .quiz-content
+  const target = $('.quiz-content');
+  // append div for correct answer
+  showCorrectContent(target);
+  console.log('`displayCorrect` ran');
 }
 
 function checkAnswerChoice(target) {
@@ -194,13 +218,15 @@ function checkAnswerChoice(target) {
   // $("input[value='2']");
   console.log('correct answer: ' + answerChoice);
   if ($(`#answer-choice-${answerChoice}`).prop("checked") == true) {
-    console.log('here');
+    UserScoreStat++;
+    console.log('score updated');
+    displayCorrect();
+  // else move to answer incorrect div
+    // display correct answer
   } else {
     console.log('not here');
-    // else move to answer incorrect div
-    // display correct answer
   }
-
+  
   console.log('`checkAnswerChoice` ran');
 }
 
