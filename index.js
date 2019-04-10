@@ -98,7 +98,6 @@ const questionList = [
 
 function hideParentDiv(target) {
   target.closest('div').addClass('hidden');
-  console.log(`${target} is now hidden`);
 }
 
 // start the quiz at question 1 (index 0)
@@ -158,7 +157,7 @@ function showQuizContent(target) {
       </div>
     </div>
   `);
-  console.log('`showQuizContent` ran');
+  console.log('displaying next question');
 }
 
 // User should press Start to begin quiz
@@ -171,7 +170,6 @@ function startQuizOnClick() {
     showQuizContent(target);
     // set event listener on new form
     userSubmitAnswerChoice();
-    console.log('`startQuizOnClick` ran');
   });
 }
 
@@ -188,7 +186,6 @@ function showCorrectContent(target) {
       </div>
     </div>
     `);
-  console.log('`showCorrectContent` ran');
 }
 
 function displayCorrect() {
@@ -202,7 +199,7 @@ function displayCorrect() {
   const target = $('.quiz-content');
   // append div for correct answer
   showCorrectContent(target);
-  console.log('`displayCorrect` ran');
+  console.log('displaying congradulatory remark');
 }
 
 function showIncorrectContent(target) {
@@ -224,7 +221,6 @@ function showIncorrectContent(target) {
       </div>
     </div>
     `);
-  console.log('`showIncorrectContent` ran');
 }
 
 function displayIncorrect() {
@@ -235,12 +231,12 @@ function displayIncorrect() {
   const target = $('.quiz-content');
   // append div for incorrect answer
   showIncorrectContent(target);
-  console.log('`displayIncorrect` ran');
+  console.log('displaying correct answer');
 }
 
 function checkAnswerChoice(target) {
   // get question number stat, assign to variable
-  console.log('current question: ' + currentQuestionNumber);
+  console.log(`current question: ${currentQuestionNumber+1}`);
   // get correct answer from questionList
   const answerChoice = questionList[currentQuestionNumber].correct;
   // if correct answer is chosen
@@ -262,7 +258,6 @@ function checkAnswerChoice(target) {
   }
   // re-initiate next click listening event
   goToNextQuestion();
-  console.log('`checkAnswerChoice` ran');
 }
 
 // User should be able to submit selected answer
@@ -271,19 +266,18 @@ function userSubmitAnswerChoice() {
   // prevent default submission
   $('.quiz-form').on('submit', event => {
     event.preventDefault();
+    console.log('answer submitted');
     // target quiz-form
     const targetForm = $('.quiz-form');
     // check if answer is correct or not
     checkAnswerChoice(targetForm);
   })
-  console.log('`userSubmitAnswerChoice` ran');
 }
 
 function removeAnswerResult() {
   // if current question number indexed on questionList is
   // undefined, then remove quiz content
   $('.quiz-answer-result').remove();
-  console.log('`removeAnswerResult` ran');
 }
 
 // User should see final result page after last question
@@ -324,7 +318,7 @@ function showFinalResults() {
         </div>
       </div>
     `);
-    console.log('`showFinalResults` ran');
+    console.log('displaying quiz results');
   }
 
 // User should be able to press next to go to next question
@@ -333,7 +327,6 @@ function showFinalResults() {
 function goToNextQuestion() {
   // listen for next click event
   $('.next-question').on('click', event => {
-    console.log('clicked');
     // see if quiz is complete
     if (currentQuestionNumber < 9) {
       // target .quiz-content
@@ -351,14 +344,13 @@ function goToNextQuestion() {
       showFinalResults();
     }
   });
-  console.log('`goToNextQuestion` ran');
 }
 
 function runQuizApp() {
   startQuizOnClick();
   userSubmitAnswerChoice();
   goToNextQuestion();
-  console.log('`runQuizApp` ran');
+  console.log('UCLA quiz app is running');
 }
 
 $(runQuizApp);
