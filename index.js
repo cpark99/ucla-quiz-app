@@ -282,20 +282,20 @@ function userSubmitAnswerChoice() {
   // User should see final result page after last question
     // User should see their score and a comment
     // User should see a button to restart the quiz
-  function goToResultPage() {
+  function showFinalResults() {
+    $('.quiz-content').append(`
+      testing
+    `);
     
-    console.log('`goToResultPage` ran');
+    console.log('`showFinalResults` ran');
   }
 
-function checkIfQuizComplete() {
+function removeAnswerResult() {
   // if current question number indexed on questionList is
   // undefined, then remove quiz content
-  if (questionList[currentQuestionNumber] === undefined) {
-    $('.quiz-content').remove();
-    // add final result content
-    goToResultPage();
-  }
-
+  $('.quiz-answer-result').remove();
+  // add final result content
+  showFinalResults();
   console.log('`checkIfQuizComplete` ran');
 }
 
@@ -307,16 +307,20 @@ function goToNextQuestion() {
   $('.next-question').on('click', event => {
     console.log('clicked');
     // see if quiz is complete
-    checkIfQuizComplete();
-    const target = $(event.currentTarget).closest('div');
-    // increase question number counter by 1
-    currentQuestionNumber++;
-    console.log(`current question is ${currentQuestionNumber}`);
-    // display new quiz content
-    showQuizContent(target);
-    // re-initiate submit listening event
-    userSubmitAnswerChoice();
-  })
+    if (currentQuestionNumber < 9) {
+      // target .quiz-content
+      const target = $(event.currentTarget).closest('div');
+      // increase question number counter by 1
+      currentQuestionNumber++;
+      // display new quiz content
+      showQuizContent(target);
+      // re-initiate submit listening event
+      userSubmitAnswerChoice();
+    } else {
+      // remove .quiz-answer-result
+      removeAnswerResult();
+    }
+  });
   console.log('`goToNextQuestion` ran');
 }
 
