@@ -9,7 +9,7 @@ const questionList = [
     'choice-2': '1899',
     'choice-3': '1919',
     'choice-4': '1947',
-    correct: 2
+    correct: 3
   },
   {
     number: 2,
@@ -18,7 +18,7 @@ const questionList = [
     'choice-2': 'Royce Hall',
     'choice-3': 'John Wooden Center',
     'choice-4': 'Anderson',
-    correct: 1
+    correct: 2
   },
   {
     number: 3,
@@ -27,7 +27,7 @@ const questionList = [
     'choice-2': '5',
     'choice-3': '23',
     'choice-4': '11',
-    correct: 0
+    correct: 1
   },
   {
     number: 4,
@@ -36,7 +36,7 @@ const questionList = [
     'choice-2': '261',
     'choice-3': '145',
     'choice-4': '215',
-    correct: 1
+    correct: 2
   },
   {
     number: 5,
@@ -45,7 +45,7 @@ const questionList = [
     'choice-2': 'Beverly Hills',
     'choice-3': 'Westwood Village',
     'choice-4': 'Brentwood',
-    correct: 2
+    correct: 3
   },
   {
     number: 6,
@@ -54,7 +54,7 @@ const questionList = [
     'choice-2': 'Joe',
     'choice-3': 'Lady Bruin',
     'choice-4': 'Josephine',
-    correct: 3
+    correct: 4
   },
   {
     number: 7,
@@ -63,7 +63,7 @@ const questionList = [
     'choice-2': 'Invent the Internet',
     'choice-3': 'Surpass 100k undergraduate, freshman applicants',
     'choice-4': 'All of the above',
-    correct: 3
+    correct: 4
   },
   {
     number: 8,
@@ -72,7 +72,7 @@ const questionList = [
     'choice-2': 'USC',
     'choice-3': 'Stanford',
     'choice-4': 'Cal State Los Angeles',
-    correct: 1
+    correct: 2
   },
   {
     number: 9,
@@ -81,7 +81,7 @@ const questionList = [
     'choice-2': 'Community College',
     'choice-3': 'Public University',
     'choice-4': 'Private College',
-    correct: 2
+    correct: 3
   },
   {
     number: 10,
@@ -90,7 +90,7 @@ const questionList = [
     'choice-2': 'John R. Wooden Medical Center',
     'choice-3': 'UCLA University Hospital',
     'choice-4': 'John Wooden Health Center',
-    correct: 0
+    correct: 1
   }
 ];
 
@@ -102,15 +102,19 @@ function hideParentDiv(target) {
   console.log(`${target} is now hidden`);
 }
 
+// start the quiz at question 1 (index 0)
+  // this value increments by 1 every new question
+let currentQuestionNumber = 0;
+// start user score at 0
+  // will increment by 1 if question is answered correctly
+let UserScoreStat = 0;
+
 function showQuizContent(target) {
   // target parent, <section class="content-box">
   const targetElement = target.closest('section');
-  // Add <div class="user-stats" to current target
-    // start question at 1 (index 0)
-    // start score at 0
-  let questionNumberStat = 0;
-  let UserScoreStat = 0;
-  // add question 1 from questionList
+  // Add <div class="quiz-content" to current target
+  // add user stats
+  // add question from questionList
     // .number and .question keys for <h4>
     // each answer choice in respective <div>
     // show submit button
@@ -118,10 +122,10 @@ function showQuizContent(target) {
     <div class="quiz-content">
       <div class="user-stats">
         <div class="stats-question-number">
-          <p>Q: ${questionNumberStat}/10</p>
+          <p>Q: ${currentQuestionNumber+1}/10</p>
         </div>
         <div class="stats-score">
-          <p>Score: ${UserScoreStat}</p>
+          <p class="stats-score-text">Score: ${UserScoreStat}</p>
         </div>
       </div>
 
@@ -129,38 +133,32 @@ function showQuizContent(target) {
         <form class="quiz-form">
           <fieldset>
             <legend class="quiz-question">
-              <h4>${questionList[questionNumberStat].number}. 
-              ${questionList[questionNumberStat].question}</h4>
+              <h4>${questionList[currentQuestionNumber].number}. 
+              ${questionList[currentQuestionNumber].question}</h4>
             </legend>
             <label class="answer-choice">
               <input type="radio" name="answer-choice" id="answer-choice-1" value="0">
-              <label for="answer-choice-1">${questionList[questionNumberStat]['choice-1']}</label>
+              <label for="answer-choice-1">${questionList[currentQuestionNumber]['choice-1']}</label>
             </label>
             <label class="answer-choice">
               <input type="radio" name="answer-choice" id="answer-choice-2" value="1">
-              <label for="answer-choice-2">${questionList[questionNumberStat]['choice-2']}</label>
+              <label for="answer-choice-2">${questionList[currentQuestionNumber]['choice-2']}</label>
             </label>
             <label class="answer-choice">
               <input type="radio" name="answer-choice" id="answer-choice-3" value="2">
-              <label for="answer-choice-3">${questionList[questionNumberStat]['choice-3']}</label>
+              <label for="answer-choice-3">${questionList[currentQuestionNumber]['choice-3']}</label>
             </label>
             <label class="answer-choice" for="answer-choice-4">
               <input type="radio" name="answer-choice" id="answer-choice-4" value="3">
-              <label for="answer-choice-4">${questionList[questionNumberStat]['choice-4']}</label>
+              <label for="answer-choice-4">${questionList[currentQuestionNumber]['choice-4']}</label>
             </label>
           </fieldset>
 
-          <button type="submit" id="submit-button">Submit</button>
+          <button type="submit" id="submit-answer">Submit</button>
         </form>
       </div>
     </div>
   `);
-  console.log('`showQuizContent` ran');
-}
-
-function submissionVerification() {
-  // verify that a choice was selected
-  // **
   console.log('`showQuizContent` ran');
 }
 
@@ -170,41 +168,114 @@ function startQuizOnClick() {
     const target = $(event.currentTarget);
     // hide parent .introduction <div>
     hideParentDiv(target);
-    // target .content-box
-    // add new html: <div class="quiz-content">
-    // add <div class="user-stats">
+    // show quiz content
     showQuizContent(target);
+    // set event listener on new form
+    userSubmitAnswerChoice();
     console.log('`startQuizOnClick` ran');
   });
 }
 
+function showCorrectContent(target) {
+  // append div .quiz-answer-result
+    // includes div .answer-correct
+    target.append(`
+    <div class="quiz-answer-result">
+      <div class="answer-correct">
+        <h3>Correct!</h3>
+        <div class="answer-image answer-correct-image"></div>
+        <h5>Good job!</h5>
+        <button class="next-question">Next</button>
+      </div>
+    </div>
+    `);
+  console.log('`showCorrectContent` ran');
+}
+
+function displayCorrect() {
+  // target form parent div
+    // remove div .quiz-form-parent
+  $('.quiz-form-parent').remove();
+  // target div .stats-score
+    // update score <p>
+  $('.stats-score-text').text(`Score: ${UserScoreStat}`);
+  // target div .quiz-content
+  const target = $('.quiz-content');
+  // append div for correct answer
+  showCorrectContent(target);
+  console.log('`displayCorrect` ran');
+}
+
+function showIncorrectContent(target) {
+  // make variable for current questionList index
+  const questionIndex = questionList[currentQuestionNumber];
+  // append div .quiz-answer-result
+    // includes div .answer-incorrect
+    // shows correct answer
+    target.append(`
+    <div class="quiz-answer-result">
+      <div class="answer-incorrect">
+        <h3>Incorrect!</h3>
+        <div class="answer-image answer-incorrect-image"></div>
+        <div class="showCorrectAnswer">
+          <h5>Answer:</h5>
+          <p>${questionIndex[`choice-${questionIndex.correct}`]}</p>
+        </div>
+        <button class="next-question">Next</button>
+      </div>
+    </div>
+    `);
+  console.log('`showIncorrectContent` ran');
+}
+
+function displayIncorrect() {
+  // target form parent div
+    // remove div .quiz-form-parent
+    $('.quiz-form-parent').remove();
+  // target div .quiz-content
+  const target = $('.quiz-content');
+  // append div for incorrect answer
+  showIncorrectContent(target);
+  console.log('`displayIncorrect` ran');
+}
+
+function checkAnswerChoice(target) {
+  // get question number stat, assign to variable
+  console.log('current question: ' + currentQuestionNumber);
+  // get correct answer from questionList
+  const answerChoice = questionList[currentQuestionNumber].correct;
+  // if correct answer is chosen
+      // increase score by 1
+      // update score
+      // move to answer correct div
+  //console.log(target);
+  // $("input[value='2']");
+  console.log('correct answer: ' + answerChoice);
+  if ($(`#answer-choice-${answerChoice}`).prop("checked") == true) {
+    console.log('answer correct');
+    UserScoreStat++;
+    console.log('score updated');
+    displayCorrect();
+  // else move to answer incorrect div
+  } else {
+    console.log('answer incorrect');
+    displayIncorrect();
+  }
+  console.log('`checkAnswerChoice` ran');
+}
+
 // User should be able to submit selected answer
-function userSumbitAnswerChoice() {
+function userSubmitAnswerChoice() {
   // listen for event submit
   // prevent default submission
-  //verify that an answer was checked
-
-  console.log('`userSumbitAnswerChoice` ran');
-}
-
-// User should update question number
-function updateQuestionNumber() {
-
-  console.log('`updateQuestionNumber` ran');
-}
-
-// User should update score
-function updateUserScore() {
-
-  console.log('`updateUserScore` ran');
-}
-
-// User should be taken to new screen that displays:
-//if correct answer or not
-//User should see score updated if correct
-function displayAnswerResult() {
-
-  console.log('`displayAnswerResult` ran');
+  $('.quiz-form').on('submit', event => {
+    event.preventDefault();
+    // target quiz-form
+    const targetForm = $('.quiz-form');
+    // check if answer is correct or not
+    checkAnswerChoice(targetForm);
+  })
+  console.log('`userSubmitAnswerChoice` ran');
 }
 
 // User should be able to press next to go to next question
@@ -232,10 +303,7 @@ function restartQuiz() {
 
 function runQuizApp() {
   startQuizOnClick();
-  updateQuestionNumber();
-  updateUserScore();
-  userSumbitAnswerChoice();
-  displayAnswerResult();
+  userSubmitAnswerChoice();
   goToNextQuestion();
   goToResultPage();
   restartQuiz();
