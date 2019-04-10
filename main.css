@@ -123,10 +123,17 @@ fieldset {
   border: 1px solid black;
 }
 
-.answer-correct-image {
+.answer-image {
   width: 100px;
   height: 100px;
   margin: 5px auto 10px auto;
+}
+
+.answer-correct-image {
+  background-color: lightgrey;
+}
+
+.answer-incorrect-image {
   background-color: lightgrey;
 }
 

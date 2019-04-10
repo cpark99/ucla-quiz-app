@@ -183,7 +183,8 @@ function showCorrectContent(target) {
     <div class="quiz-answer-result">
       <div class="answer-correct">
         <h3>Correct!</h3>
-        <div class="answer-correct-image"></div>
+        <div class="answer-image answer-correct-image"></div>
+        <h5>Good job!</h5>
         <button class="next-question">Next</button>
       </div>
     </div>
@@ -205,6 +206,39 @@ function displayCorrect() {
   console.log('`displayCorrect` ran');
 }
 
+function showIncorrectContent(target) {
+  // make variable for current questionList index
+  const questionIndex = questionList[currentQuestionNumber];
+  // append div .quiz-answer-result
+    // includes div .answer-incorrect
+    // shows correct answer
+    target.append(`
+    <div class="quiz-answer-result">
+      <div class="answer-incorrect">
+        <h3>Incorrect!</h3>
+        <div class="answer-image answer-incorrect-image"></div>
+        <div class="showCorrectAnswer">
+          <h5>Answer:</h5>
+          <p>${questionIndex[`choice-${questionIndex.correct}`]}</p>
+        </div>
+        <button class="next-question">Next</button>
+      </div>
+    </div>
+    `);
+  console.log('`showIncorrectContent` ran');
+}
+
+function displayIncorrect() {
+  // target form parent div
+    // remove div .quiz-form-parent
+    $('.quiz-form-parent').remove();
+  // target div .quiz-content
+  const target = $('.quiz-content');
+  // append div for incorrect answer
+  showIncorrectContent(target);
+  console.log('`displayIncorrect` ran');
+}
+
 function checkAnswerChoice(target) {
   // get question number stat, assign to variable
   console.log('current question: ' + currentQuestionNumber);
@@ -218,15 +252,15 @@ function checkAnswerChoice(target) {
   // $("input[value='2']");
   console.log('correct answer: ' + answerChoice);
   if ($(`#answer-choice-${answerChoice}`).prop("checked") == true) {
+    console.log('answer correct');
     UserScoreStat++;
     console.log('score updated');
     displayCorrect();
   // else move to answer incorrect div
-    // display correct answer
   } else {
-    console.log('not here');
+    console.log('answer incorrect');
+    displayIncorrect();
   }
-  
   console.log('`checkAnswerChoice` ran');
 }
 
@@ -241,22 +275,7 @@ function userSubmitAnswerChoice() {
     // check if answer is correct or not
     checkAnswerChoice(targetForm);
   })
-  
   console.log('`userSubmitAnswerChoice` ran');
-}
-
-// User should update question number
-function updateQuestionNumber() {
-
-  console.log('`updateQuestionNumber` ran');
-}
-
-// User should be taken to new screen that displays:
-//if correct answer or not
-//User should see score updated if correct
-function displayAnswerResult() {
-
-  console.log('`displayAnswerResult` ran');
 }
 
 // User should be able to press next to go to next question
@@ -284,9 +303,7 @@ function restartQuiz() {
 
 function runQuizApp() {
   startQuizOnClick();
-  updateQuestionNumber();
   userSubmitAnswerChoice();
-  displayAnswerResult();
   goToNextQuestion();
   goToResultPage();
   restartQuiz();
