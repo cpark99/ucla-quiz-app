@@ -13,11 +13,11 @@ const questionList = [
   },
   {
     number: 2,
-    question: 'This building is known as what?',
-    'choice-1': 'Powell Library',
+    question: 'Which building is one of the original four buildings?',
+    'choice-1': 'Murphy Hall',
     'choice-2': 'Royce Hall',
-    'choice-3': 'John Wooden Center',
-    'choice-4': 'Anderson',
+    'choice-3': 'The John R. Wooden Center',
+    'choice-4': 'Bunche Hall',
     correct: 2
   },
   {
