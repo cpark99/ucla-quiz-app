@@ -102,16 +102,64 @@ function hideParentDiv(target) {
   console.log(`${target} is now hidden`);
 }
 
+function showUserQuizStats(target) {
+  // target parent, <section class="content-box">
+  const targetElement = target.closest('section');
+  // Add <div class="user-stats" to current target
+  let questionNumberStat = 0;
+  let UserScoreStat = 0;
+  targetElement.html(`
+    <div class="quiz-content">
+      <div class="user-stats">
+        <div class="stats-question-number">
+          <p>Q: ${questionNumberStat}/10</p>
+        </div>
+        <div class="stats-score">
+          <p>Score: ${UserScoreStat}</p>
+        </div>
+      </div>
+    </div>
+  `);
+
+  console.log('`showUserQuizStats` ran');
+}
+
+function displayQuestion1(target) {
+  // target <div class="quiz-content">
+  const targetElement = $('.quiz-content');
+  //console.log(targetElement);
+  // add question 1 from questionList
+  // .number and .question keys for <h4>
+  targetElement.append(`
+    <div class="quiz-question">
+      <h4>${questionList[0].number}. ${questionList[0].question}</h4>
+    </div>
+  `);
+  // each answer choice in respective <div>
+  // show submit button
+
+  console.log('`displayQuestion1` ran');
+}
+
 // User should press Start to begin quiz
 function startQuizOnClick() {
   $('.introduction').on('click', '#start-quiz-button', event => {
     const target = $(event.currentTarget);
-    // hide .introduction <div>
+    // hide parent .introduction <div>
     hideParentDiv(target);
-    // add new <div class="quiz-content">
+    // target .content-box
+    // add new html: <div class="quiz-content">
     // add <div class="user-stats">
     // start question at 1
     // start score at 0
+    showUserQuizStats(target);
+    // set target to <section class="content-box">
+    const targetSection = $('.content-box');
+    // add question 1 from questionList
+    // .number and .question keys for <h4>
+    // each answer choice in respective <div>
+    // show submit button
+    displayQuestion1(targetSection);
 
     console.log('`startQuizOnClick` ran');
   });
