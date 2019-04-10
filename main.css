@@ -76,19 +76,42 @@ body {
   float: right;
 }
 
-.quiz-question {
+.quiz-parent-form, 
+.quiz-form,
+fieldset {
+  width: 100%;
+  padding: 0;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+.quiz-form .quiz-question {
   border: 1px solid black;
   margin: 5px auto 10px auto;
   clear: both;
+  width: 100%;
 }
 
 .answer-choice {
   border: 1px solid black;
   margin: 0 auto 0 auto;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer-choice label {
+  margin-left: 10px;
 }
 
 #submit-button {
-  margin: 10px 0 5px 0;
+  margin: 10px 0 10px 0;
+  width: 100px;
+  height: 30px;
 }
 
 /* Answer result content */
