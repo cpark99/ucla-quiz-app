@@ -102,6 +102,10 @@ function hideParentDiv(target) {
   console.log(`${target} is now hidden`);
 }
 
+// start the quiz at question 1 (index 0)
+  // this value increments by 1 every new question
+let currentQuestionNumber = 0;
+
 function showQuizContent(target, questionNumberStat, UserScoreStat) {
   // target parent, <section class="content-box">
   const targetElement = target.closest('section');
@@ -164,9 +168,9 @@ function startQuizOnClick() {
     // show quiz content
       // start question at 1 (index 0)
       // start score at 0
-    showQuizContent(target, 0, 0);
+    showQuizContent(target, currentQuestionNumber, 0);
     // set event listener on new form
-    userSumbitAnswerChoice();
+    userSubmitAnswerChoice();
     console.log('`startQuizOnClick` ran');
   });
 }
@@ -179,17 +183,16 @@ function updateUserScore() {
 
 function checkAnswerChoice(target) {
   // get question number stat, assign to variable
-  console.log($())
-  const questionNumberStat = 0;
+  console.log('current question: ' + currentQuestionNumber);
   // get correct answer from questionList
-  const answerChoice = questionList[questionNumberStat].correct;
+  const answerChoice = questionList[currentQuestionNumber].correct;
   // if correct answer is chosen
       // increase score by 1
       // update score
       // move to answer correct div
   //console.log(target);
   // $("input[value='2']");
-  console.log(answerChoice);
+  console.log('correct answer: ' + answerChoice);
   if ($(`#answer-choice-${answerChoice}`).prop("checked") == true) {
     console.log('here');
   } else {
@@ -202,7 +205,7 @@ function checkAnswerChoice(target) {
 }
 
 // User should be able to submit selected answer
-function userSumbitAnswerChoice() {
+function userSubmitAnswerChoice() {
   // listen for event submit
   // prevent default submission
   $('.quiz-form').on('submit', event => {
@@ -213,7 +216,7 @@ function userSumbitAnswerChoice() {
     checkAnswerChoice(targetForm);
   })
   
-  console.log('`userSumbitAnswerChoice` ran');
+  console.log('`userSubmitAnswerChoice` ran');
 }
 
 // User should update question number
@@ -256,7 +259,7 @@ function restartQuiz() {
 function runQuizApp() {
   startQuizOnClick();
   updateQuestionNumber();
-  userSumbitAnswerChoice();
+  userSubmitAnswerChoice();
   displayAnswerResult();
   goToNextQuestion();
   goToResultPage();
