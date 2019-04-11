@@ -421,8 +421,9 @@ and (max-width: 1224px) {
     float: right;
   }
 
-  #submit-button {
-    margin: 0 0 0 0;
+  #submit-answer {
+    width: 140px;
+    height: 45px;
   }
 
   .quiz-answer-result {
