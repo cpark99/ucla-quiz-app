@@ -135,19 +135,19 @@ function showQuizContent(target) {
               ${questionList[currentQuestionNumber].question}</h4>
             </legend>
             <label class="answer-choice choice-1">
-              <input type="radio" name="answer-choice" id="answer-choice-1" value="0">
+              <input type="radio" name="answer-choice" id="answer-choice-1" value="0" required>
               <label for="answer-choice-1">${questionList[currentQuestionNumber]['choice-1']}</label>
             </label>
             <label class="answer-choice choice-2">
-              <input type="radio" name="answer-choice" id="answer-choice-2" value="1">
+              <input type="radio" name="answer-choice" id="answer-choice-2" value="1" required>
               <label for="answer-choice-2">${questionList[currentQuestionNumber]['choice-2']}</label>
             </label>
             <label class="answer-choice choice-3">
-              <input type="radio" name="answer-choice" id="answer-choice-3" value="2">
+              <input type="radio" name="answer-choice" id="answer-choice-3" value="2" required>
               <label for="answer-choice-3">${questionList[currentQuestionNumber]['choice-3']}</label>
             </label>
             <label class="answer-choice choice-4" for="answer-choice-4">
-              <input type="radio" name="answer-choice" id="answer-choice-4" value="3">
+              <input type="radio" name="answer-choice" id="answer-choice-4" value="3" required>
               <label for="answer-choice-4">${questionList[currentQuestionNumber]['choice-4']}</label>
             </label>
           </fieldset>
