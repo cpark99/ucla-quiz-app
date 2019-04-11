@@ -24,16 +24,58 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  background: url("https://cdn.wallpapersafari.com/86/34/HAq2up.jpg") no-repeat;
+  background-size: 100%;
+  color: white;
+  background-position: center top;
+}
+
+.image-top-half h1 {
+  margin-bottom: 15px;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #1e90ff;
 }
 
 .content-box {
   border: 1px solid black;
 }
 
+.content-box::after {
+  content: "";
+  background: url("https://uclafirstyearexperience.files.wordpress.com/2016/02/logowhiteback.gif?w=809") no-repeat;
+  opacity: 0.3;
+  top: 28%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-size: 110%;
+  background-position: top center;
+}
+
 .introduction {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.introduction h3 {
+  color: #1e90ff;
+  font-size: 20px;
+  -webkit-text-fill-color: #1e90ff; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: gold;
+}
+
+.introduction p {
+  line-height: 1.5;
+  font-size: 16px;
+  color: #2574a9;
+  -webkit-text-fill-color: #2574a9; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .5px;
+  -webkit-text-stroke-color: #1e90ff;
 }
 
 #start-quiz-button {
@@ -49,11 +91,26 @@ footer {
 .image-bottom-half {
   border: 1px solid black;
   height: 100px;
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0 10px;background: url("https://cdn.wallpapersafari.com/86/34/HAq2up.jpg") no-repeat;
+  background-size: 100%;
+  color: white;
+  background-position: center bottom;
+}
+
+.image-bottom-half p {
+  margin-top: 60px;
+  margin-bottom: 5px;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 0.3px;
+  -webkit-text-stroke-color: #1e90ff;
 }
 
 .hidden {
   display: none;
+}
+
+.italics {
+  font-style: italic;
 }
 
 /* Question contents */
@@ -66,7 +123,7 @@ footer {
 
 .user-stats div {
   display: inline-block;
-  margin: 5px auto 5px auto;
+  margin: 5px auto 10px auto;
   padding: 0 5px 0 5px;
 }
 
@@ -94,9 +151,13 @@ fieldset {
 
 .quiz-form .quiz-question {
   border: 1px solid black;
-  margin: 5px auto 10px auto;
+  margin: 0px auto 10px auto;
   clear: both;
   width: 100%;
+}
+
+.quiz-question {
+  background-color: rgb(241, 241, 241);
 }
 
 .answer-choice {
@@ -106,6 +167,8 @@ fieldset {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(241, 241, 241);
+  color: #2574a9;
 }
 
 .answer-choice label {
@@ -122,28 +185,33 @@ fieldset {
 
 .quiz-answer-result {
   clear: both;
-  margin: 5px auto 5px auto;
+  margin: 5px auto 10px auto;
   width: 200px;
   border: 1px solid black;
+  background-color: rgb(241, 241, 241);
 }
 
 .answer-image {
-  width: 100px;
+  width: 150px;
   height: 100px;
   margin: 5px auto 10px auto;
+  border: 1px solid black;
 }
 
 .answer-correct-image {
-  background-color: lightgrey;
+  background: url("https://pbs.twimg.com/profile_images/952872960767025152/t_ssj_Uy_400x400.jpg") no-repeat;
+  background-size: 100%;
 }
 
 .answer-incorrect-image {
-  background-color: lightgrey;
+  background: url("https://cdn.vox-cdn.com/thumbor/gzCEuwX5hMPHTbGMX9vDyvn_sC0=/0x0:4288x3068/1200x800/filters:focal(1801x1191:2487x1877)/cdn.vox-cdn.com/uploads/chorus_image/image/53426873/usa_today_9898979.0.jpg") no-repeat;
+  background-size: 100%;
 }
 
 .answer-correct h5 {
   font-size: 16px;
   margin: 15px auto 15px auto;
+  color: #1e90ff;
 }
 
 .next-question {
@@ -159,12 +227,24 @@ fieldset {
 
 .show-correct-answer p {
   margin-top: 10px;
+  color: #1e90ff;
 }
 
 /* Final result contents */
 
 .end-result {
   clear: both;
+  border: 1px solid black;
+  background-color: rgb(241, 241, 241);
+  margin-bottom: 10px;
+}
+
+.end-result h2 {
+  color: #1e90ff;
+}
+
+.end-result h4 {
+  color: #2574a9;
 }
 
 .restart-button {
@@ -181,6 +261,7 @@ and (max-width: 767px) {
 
   header h1 {
     font-size: 28px;
+    margin-bottom: 10px;
   }
 
   .introduction h3 {
@@ -199,8 +280,29 @@ and (max-width: 1224px) {
     width: 700px;
   }
 
+  .image-top-half {
+    background-position: center 20%;
+  }
+
   header h1 {
     font-size: 34px;
+  }
+
+  .content-box {
+    height: 300px;
+  }
+
+  .content-box::after {
+    top: 20%;
+    background-size: 80%;
+  }
+
+  .image-bottom-half {
+    background-position: center 85%;
+  }
+
+  .image-bottom-half p {
+    margin-top: 70px;
   }
 
   .introduction h3 {
@@ -209,6 +311,10 @@ and (max-width: 1224px) {
 
   .introduction p {
     font-size: 20px;
+  }
+
+  #start-quiz-button {
+    margin-top: 20px;
   }
 
   .quiz-answer-result {
