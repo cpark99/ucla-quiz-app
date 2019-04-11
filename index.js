@@ -50,10 +50,10 @@ const questionList = [
   {
     number: 6,
     question: 'UCLA\'s female mascot has what name?',
-    'choice-1': 'Jacqueline',
-    'choice-2': 'Joe',
+    'choice-1': 'Jacqueline Bruin',
+    'choice-2': 'Joe Bruin',
     'choice-3': 'Lady Bruin',
-    'choice-4': 'Josephine',
+    'choice-4': 'Josephine Bruin',
     correct: 4
   },
   {
