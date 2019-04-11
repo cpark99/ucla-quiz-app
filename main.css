@@ -45,13 +45,13 @@ body {
   content: "";
   background: url("https://uclafirstyearexperience.files.wordpress.com/2016/02/logowhiteback.gif?w=809") no-repeat;
   opacity: 0.3;
-  top: 28%;
+  top: 31%;
   left: 0;
   bottom: 0;
   right: 0;
   position: absolute;
   z-index: -1;
-  background-size: 110%;
+  background-size: 90%;
   background-position: top center;
 }
 
@@ -92,7 +92,7 @@ footer {
   border: 1px solid black;
   height: 100px;
   padding: 0 10px 0 10px;background: url("https://cdn.wallpapersafari.com/86/34/HAq2up.jpg") no-repeat;
-  background-size: 100%;
+  background-size: 110%;
   color: white;
   background-position: center bottom;
 }
@@ -195,12 +195,12 @@ fieldset {
   width: 150px;
   height: 100px;
   margin: 5px auto 10px auto;
-  border: 1px solid black;
 }
 
 .answer-correct-image {
   background: url("https://pbs.twimg.com/profile_images/952872960767025152/t_ssj_Uy_400x400.jpg") no-repeat;
   background-size: 100%;
+  border: 1px solid black;
 }
 
 .answer-incorrect-image {
@@ -228,6 +228,7 @@ fieldset {
 .show-correct-answer p {
   margin-top: 10px;
   color: #1e90ff;
+  font-weight: bold;
 }
 
 /* Final result contents */
@@ -271,7 +272,6 @@ and (max-width: 767px) {
   .introduction p {
     font-size: 16px;
   }
-
 }
 
 @media (min-width: 768px) 
@@ -289,12 +289,21 @@ and (max-width: 1224px) {
   }
 
   .content-box {
-    height: 300px;
+    height: 390px;
   }
 
   .content-box::after {
-    top: 20%;
+    top: 29%;
     background-size: 80%;
+  }
+
+  div.introduction h3 {
+    font-size: 32px;
+    margin: 80px auto 40px auto;
+  }
+
+  #start-quiz-button {
+    margin-top: 30px;
   }
 
   .image-bottom-half {
@@ -330,12 +339,24 @@ and (max-width: 1224px) {
     height: 130px;
   }
 
+  .answer-incorrect-image {
+    background-size: 150%;
+  }
+
   .answer-correct h5 {
     font-size: 20px;
   }
 
   .show-correct-answer h5 {
     font-size: 16px;
+  }
+
+  .end-result h2 {
+    font-size: 30px;
+  }
+
+  .end-result h4 {
+    font-size: 20px;
   }
 }
 
@@ -344,18 +365,31 @@ and (max-width: 1224px) {
     width: 900px;
   }
 
-  header h1 {
-    font-size: 38px;
+  .image-top-half h1 {
+    font-size: 44px;
+    margin-bottom: 5px;
+  }
+
+  .image-top-half {
+    background-position: center 20%;
   }
 
   .introduction h3 {
-    font-size: 30px;
-    margin: 100px auto 40px auto;
+    font-size: 38px;
+    margin: 80px auto 40px auto;
   }
 
   .introduction p {
-    font-size: 20px;
-    margin-bottom: 30px;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .image-bottom-half {
+    background-position: center 80%;
+  }
+
+  .image-bottom-half p {
+    margin-top: 80px;
   }
 
   #start-quiz-button {
@@ -366,6 +400,11 @@ and (max-width: 1224px) {
 
   .content-box {
     height: 410px;
+  }
+
+  .content-box::after {
+    top: 28%;
+    background-size: 60%;
   }
 
   .answer-choice {
@@ -395,7 +434,17 @@ and (max-width: 1224px) {
   
   .answer-image {
     width: 150px;
-    height: 150px;
+    height: 140px;
+  }
+
+  .answer-correct-image {
+    background-size: 95%;
+    background-position: center center;
+    background-color: white;
+  }
+
+  .answer-incorrect-image {
+    background-size: 150%;
   }
   
   .answer-correct h5 {
@@ -404,6 +453,11 @@ and (max-width: 1224px) {
   
   .show-correct-answer h5 {
     font-size: 20px;
+  }
+
+  .show-correct-answer p {
+    font-size: 16px;
+    font-weight: bold;
   }
 
   .end-result {
