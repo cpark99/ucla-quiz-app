@@ -120,10 +120,10 @@ function showQuizContent(target) {
     <div class="quiz-content">
       <div class="user-stats">
         <div class="stats-question-number">
-          <p>Q: ${currentQuestionNumber+1}/10</p>
+          <p>Q: <span class="color-blue">${currentQuestionNumber+1}</span>/10</p>
         </div>
         <div class="stats-score">
-          <p class="stats-score-text">Score: ${UserScoreStat}</p>
+          <p class="stats-score-text">Score: <span class="color-blue">${UserScoreStat}</span></p>
         </div>
       </div>
 
