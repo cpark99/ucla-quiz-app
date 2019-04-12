@@ -94,13 +94,18 @@ const questionList = [
   }
 ];
 
-
-
 // User is presented with introduction content
 
 function hideParentDiv(target) {
   target.closest('div').addClass('hidden');
 }
+
+// start the quiz at question 1 (index 0)
+  // this value increments by 1 every new question
+let currentQuestionNumber = 0;
+// start user score at 0
+  // will increment by 1 if question is answered correctly
+let UserScoreStat = 0;
 
 function showQuizContent(target) {
   // target parent, <section class="content-box">
@@ -155,10 +160,13 @@ function showQuizContent(target) {
   console.log('displaying next question');
 }
 
+// User should press Start to begin quiz
 function startQuizOnClick() {
-  $('#start-quiz-button').click(event => {
+  $('.js-introduction').on('click', '#start-quiz-button', event => {
     const target = $(event.currentTarget);
+    // hide parent .introduction <div>
     hideParentDiv(target);
+    // show quiz content
     showQuizContent(target);
     // set event listener on new form
     userSubmitAnswerChoice();
@@ -166,7 +174,9 @@ function startQuizOnClick() {
 }
 
 function showCorrectContent(target) {
-  target.append(`
+  // append div .quiz-answer-result
+    // includes div .answer-correct
+    target.append(`
     <div class="quiz-answer-result">
       <div class="answer-correct">
         <h3>Correct!</h3>
@@ -175,18 +185,29 @@ function showCorrectContent(target) {
         <button class="next-question">Next</button>
       </div>
     </div>
-  `);
+    `);
 }
 
 function displayCorrect() {
+  // target form parent div
+    // remove div .quiz-form-parent
   $('.quiz-form-parent').remove();
+  // target div .stats-score
+    // update score <p>
   $('.stats-score-text').text(`Score: ${UserScoreStat}`);
+  // target div .quiz-content
   const target = $('.quiz-content');
+  // append div for correct answer
   showCorrectContent(target);
+  console.log('displaying congradulatory remark');
 }
 
 function showIncorrectContent(target) {
+  // make variable for current questionList index
   const questionIndex = questionList[currentQuestionNumber];
+  // append div .quiz-answer-result
+    // includes div .answer-incorrect
+    // shows correct answer
     target.append(`
     <div class="quiz-answer-result">
       <div class="answer-incorrect">
@@ -203,39 +224,73 @@ function showIncorrectContent(target) {
 }
 
 function displayIncorrect() {
-  $('.quiz-form-parent').remove();
+  // target form parent div
+    // remove div .quiz-form-parent
+    $('.quiz-form-parent').remove();
+  // target div .quiz-content
   const target = $('.quiz-content');
+  // append div for incorrect answer
   showIncorrectContent(target);
+  console.log('displaying correct answer');
 }
 
 function checkAnswerChoice(target) {
+  // get question number stat, assign to variable
+  console.log(`current question: ${currentQuestionNumber+1}`);
+  // get correct answer from questionList
   const answerChoice = questionList[currentQuestionNumber].correct;
+  // if correct answer is chosen
+      // increase score by 1
+      // update score
+      // move to answer correct div
+  //console.log(target);
+  // $("input[value='2']");
+  console.log('correct answer: ' + answerChoice);
   if ($(`#answer-choice-${answerChoice}`).prop("checked") == true) {
+    console.log('answer correct');
     UserScoreStat++;
+    console.log('score updated');
     displayCorrect();
+  // else move to answer incorrect div
   } else {
+    console.log('answer incorrect');
     displayIncorrect();
   }
+  // re-initiate next click listening event
   goToNextQuestion();
 }
 
+// User should be able to submit selected answer
 function userSubmitAnswerChoice() {
+  // listen for event submit
+  // prevent default submission
   $('.quiz-form').on('submit', event => {
     event.preventDefault();
+    console.log('answer submitted');
+    // target quiz-form
     const targetForm = $('.quiz-form');
+    // check if answer is correct or not
     checkAnswerChoice(targetForm);
   })
 }
 
 function removeAnswerResult() {
+  // if current question number indexed on questionList is
+  // undefined, then remove quiz content
   $('.quiz-answer-result').remove();
 }
 
+// User should see final result page after last question
+  // User should see their score and a comment
+  // User should see a button to restart the quiz
 function showFinalResults() {
+  // result headers determined by UserScoreStat
   let resultTitle = 'title';
   let resultDescription = 'description';
   if (UserScoreStat > 8) {
+    // set h2
     resultTitle = 'TRUE BRUIN';
+    // set h4
     resultDescription = 'A champion among champions!';
   } else if (UserScoreStat > 6) {
     resultTitle = 'LOYAL BRUIN';
@@ -250,41 +305,52 @@ function showFinalResults() {
     resultTitle = 'TROJAN';
     resultDescription = 'A crying baby among babies!';
   }
-  $('.quiz-content').append(`
-    <div class="end-result">
-      <p>You are a...</p>
-      <h2>${resultTitle}</h3>
-      <h4>${resultDescription}</h4>
-      <p>Take the quiz again!</p>
-      <form id="restart-button">
-        <button type="submit" class="restart-button">Restart</a>
-      </form>
-    </div>
-  `);
+    // append quiz results
+      // with reset link/button
+    $('.quiz-content').append(`
+      <div class="end-result">
+        <p>You are a...</p>
+        <h2>${resultTitle}</h3>
+        <h4>${resultDescription}</h4>
+        <p>Take the quiz again!</p>
+        <form id="restart-button">
+          <button type="submit" class="restart-button">Restart</a>
+        </div>
+      </div>
+    `);
+    console.log('displaying quiz results');
   }
 
+// User should be able to press next to go to next question
+  // User should see question number updated
+  // User should see next question
 function goToNextQuestion() {
+  // listen for next click event
   $('.next-question').on('click', event => {
     // see if quiz is complete
     if (currentQuestionNumber < 9) {
+      // target .quiz-content
       const target = $(event.currentTarget).closest('div');
+      // increase question number counter by 1
       currentQuestionNumber++;
+      // display new quiz content
       showQuizContent(target);
+      // re-initiate submit listening event
       userSubmitAnswerChoice();
     } else {
+      // remove .quiz-answer-result
       removeAnswerResult();
+      // add final result content
       showFinalResults();
     }
   });
 }
 
 function runQuizApp() {
-  let currentQuestionNumber = 0;
-  let UserScoreStat = 0;
-
   startQuizOnClick();
   userSubmitAnswerChoice();
   goToNextQuestion();
+  console.log('UCLA quiz app is running');
 }
 
 $(runQuizApp);
