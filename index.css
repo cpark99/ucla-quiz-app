@@ -25,31 +25,8 @@ h1 {
   -webkit-text-stroke-color: #1e90ff;
 }
 
-h3 {
-  color: #1e90ff;
-  font-size: 20px;
-  -webkit-text-fill-color: #1e90ff; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: gold;
-}
-
 h4 {
   color: #2574a9;
-}
-
-h5 {
-  font-size: 16px;
-  margin: 15px auto 15px auto;
-  color: #1e90ff;
-}
-
-p {
-  line-height: 1.5;
-  font-size: 16px;
-  color: #2574a9;
-  -webkit-text-fill-color: #2574a9; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: .5px;
-  -webkit-text-stroke-color: #1e90ff;
 }
 
 button {
@@ -254,6 +231,38 @@ fieldset {
 
 .end-result h2 {
   color: #1e90ff;
+}
+
+.quiz-content h4 {
+  color: black;
+}
+
+.introduction h3 {
+  color: #1e90ff;
+  font-size: 20px;
+  -webkit-text-fill-color: #1e90ff; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: gold;
+}
+
+.introduction h5 {
+  font-size: 16px;
+  margin: 15px auto 15px auto;
+  color: #1e90ff;
+}
+
+.introduction p {
+  line-height: 1.5;
+  font-size: 16px;
+  color: #2574a9;
+  -webkit-text-fill-color: #2574a9; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .5px;
+  -webkit-text-stroke-color: #1e90ff;
+}
+
+.answer-correct h5 {
+  color: #1e90ff;
+  margin: 15px 0 15px 0;
 }
 
 
