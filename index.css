@@ -37,6 +37,11 @@ button:hover {
   background-color: gold;
   color: #1e90ff;
   border: 2px solid #1e90ff;
+  cursor: pointer;
+}
+
+label:hover {
+  cursor: pointer;
 }
 
 footer {
@@ -46,6 +51,10 @@ footer {
 fieldset {
   border: none;
   padding: 0;
+}
+
+input {
+  margin-right: 7px;
 }
 
 .quiz-parent-form, 
@@ -91,7 +100,7 @@ fieldset {
   content: "";
   background: url("https://uclafirstyearexperience.files.wordpress.com/2016/02/logowhiteback.gif?w=809") no-repeat;
   opacity: 0.3;
-  top: 27%;
+  top: 330px;
   left: 0;
   bottom: 0;
   right: 0;
@@ -105,6 +114,7 @@ fieldset {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 140px;
 }
 
 .image-bottom-half {
@@ -167,8 +177,10 @@ fieldset {
 
 .answer-correct-image {
   background: url("https://pbs.twimg.com/profile_images/952872960767025152/t_ssj_Uy_400x400.jpg") no-repeat;
-  background-size: 100%;
+  background-size: 66%;
   border: 1px solid black;
+  background-color: white;
+  background-position: 25px;
 }
 
 .answer-incorrect-image {
@@ -178,8 +190,8 @@ fieldset {
 
 .next-question {
   margin-bottom: 10px;
-  height: 30px;
-  width: 80px;
+  height: 40px;
+  width: 150px;
 }
 
 .end-result {
@@ -189,15 +201,13 @@ fieldset {
   margin-bottom: 10px;
 }
 
-.restart-button {
-  height: 40px;
-  width: 150px;
-  margin: 0 auto 10px auto;  
-}
-
 .answer-choice:hover {
   background-color: gold;
   border: 2px solid #1e90ff;
+}
+
+.introduction h3 {
+  margin-top: 22px;
 }
 
 .image-bottom-half p {
@@ -269,13 +279,20 @@ fieldset {
 #start-quiz-button {
   height: 40px;
   width: 150px;
-  margin-bottom: 10px;
+  margin-bottom: 0;
+  margin-top: 22px;
 }
 
 #submit-answer {
   margin: 10px 0 10px 0;
-  width: 100px;
-  height: 30px;
+  width: 150px;
+  height: 40px;
+}
+
+#restart-button {
+  height: 40px;
+  width: 150px;
+  margin: 0 auto 10px auto;  
 }
 
 @media (min-width: 360px)
@@ -298,8 +315,7 @@ and (max-width: 767px) {
   }
 }
 
-@media (min-width: 768px) 
-and (max-width: 1224px) {
+@media (min-width: 768px) {
   .container {
     width: 700px;
   }
@@ -313,11 +329,11 @@ and (max-width: 1224px) {
   }
 
   .content-box {
-    height: 390px;
+    height: 417px;
   }
 
   .content-box::after {
-    top: 37%;
+    top: 315px;
     background-size: 670px;
   }
 
@@ -384,7 +400,7 @@ and (max-width: 1224px) {
   }
 }
 
-@media (min-width: 1225px) {
+@media (min-width: 1223px) {
   .container {
     width: 900px;
   }
@@ -416,16 +432,12 @@ and (max-width: 1224px) {
     margin-top: 80px;
   }
 
-  #start-quiz-button {
-    margin-top: 20px;
-  }
-
   .content-box {
     height: 410px;
   }
 
   .content-box::after {
-    top: 37%;
+    top: 290px;
     background-size: 730px;
   }
 
@@ -441,11 +453,6 @@ and (max-width: 1224px) {
 
   .choice-2, .choice-4 {
     float: right;
-  }
-
-  #submit-answer {
-    width: 140px;
-    height: 45px;
   }
 
   .quiz-answer-result {
@@ -499,7 +506,12 @@ and (max-width: 1224px) {
     font-size: 24px;
   }
 
-  #restart-button {
-    margin-top: 40px;
+  #start-quiz-button {
+    margin-top: 4px;
+  }
+
+  #submit-answer {
+    width: 140px;
+    height: 45px;
   }
 }

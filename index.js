@@ -106,7 +106,7 @@ function showQuizContent(target) {
     <div class="quiz-content">
       <div class="user-stats">
         <div class="stats-question-number">
-          <p>Q: <span class="color-blue">${currentQuestionNumber+1}</span>/10</p>
+          <p>Q: <span class="color-blue">${currentQuestionNumber+1}</span> /10</p>
         </div>
         <div class="stats-score">
           <p class="stats-score-text">Score: <span class="color-blue">${UserScoreStat}</span></p>
@@ -122,19 +122,19 @@ function showQuizContent(target) {
             </legend>
             <label class="answer-choice choice-1">
               <input type="radio" name="answer-choice" id="answer-choice-1" value="0" required>
-              <label for="answer-choice-1">${questionList[currentQuestionNumber]['choice-1']}</label>
+              <span for="answer-choice-1">${questionList[currentQuestionNumber]['choice-1']}</span>
             </label>
             <label class="answer-choice choice-2">
               <input type="radio" name="answer-choice" id="answer-choice-2" value="1" required>
-              <label for="answer-choice-2">${questionList[currentQuestionNumber]['choice-2']}</label>
+              <span for="answer-choice-2">${questionList[currentQuestionNumber]['choice-2']}</span>
             </label>
             <label class="answer-choice choice-3">
               <input type="radio" name="answer-choice" id="answer-choice-3" value="2" required>
-              <label for="answer-choice-3">${questionList[currentQuestionNumber]['choice-3']}</label>
+              <span for="answer-choice-3">${questionList[currentQuestionNumber]['choice-3']}</span>
             </label>
             <label class="answer-choice choice-4" for="answer-choice-4">
               <input type="radio" name="answer-choice" id="answer-choice-4" value="3" required>
-              <label for="answer-choice-4">${questionList[currentQuestionNumber]['choice-4']}</label>
+              <span for="answer-choice-4">${questionList[currentQuestionNumber]['choice-4']}</span>
             </label>
           </fieldset>
 
@@ -169,7 +169,7 @@ function showCorrectContent(target) {
 
 function displayCorrect() {
   $('.quiz-form-parent').remove();
-  $('.stats-score-text').text(`Score: ${UserScoreStat}`);
+  $('.stats-score-text').html('Score: <span class="color-blue">' + UserScoreStat + '</span>');
   const target = $('.quiz-content');
   showCorrectContent(target);
 }
@@ -247,7 +247,7 @@ function showFinalResults() {
       <h4>${resultDescription}</h4>
       <p>Take the quiz again!</p>
       <form id="restart-button">
-        <button type="submit" class="restart-button">Restart</a>
+        <button type="submit" id="restart-button">Restart</a>
       </div>
     </div>
   `);
@@ -263,7 +263,15 @@ function goToNextQuestion() {
     } else {
       removeAnswerResult();
       showFinalResults();
+      restartQuiz();
     }
+  });
+}
+
+function restartQuiz() {
+  $('.quiz-content').on('submit', '#restart-button', event => {
+    event.preventDefault();
+    window.location.reload(false);
   });
 }
 
@@ -271,6 +279,7 @@ function runQuizApp() {
   startQuizOnClick();
   userSubmitAnswerChoice();
   goToNextQuestion();
+  restartQuiz();
 }
 
 $(runQuizApp);
