@@ -31,6 +31,7 @@ h4 {
 
 button {
   font-weight: bold;
+  border: 3px solid #2574a9;
 }
 
 button:hover {
@@ -79,6 +80,10 @@ fieldset {
   font-style: italic;
 }
 
+.container {
+  margin-top: 40px;
+}
+
 .image-top-half {
   border: 1px solid black;
   height: 100px;
@@ -100,7 +105,7 @@ fieldset {
   content: "";
   background: url("https://uclafirstyearexperience.files.wordpress.com/2016/02/logowhiteback.gif?w=809") no-repeat;
   opacity: 0.3;
-  top: 330px;
+  top: 370px;
   left: 0;
   bottom: 0;
   right: 0;
@@ -329,7 +334,7 @@ and (max-width: 767px) {
   }
 
   .content-box::after {
-    top: 315px;
+    top: 355px;
     background-size: 670px;
   }
 
@@ -418,7 +423,7 @@ and (max-width: 767px) {
   }
 
   .content-box::after {
-    top: 308px;
+    top: 348px;
     background-size: 730px;
   }
 
