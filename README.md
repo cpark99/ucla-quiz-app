@@ -21,13 +21,13 @@ ___
 
 ### Screenshots:
 ##### Mobile:
-![Mobile Screenshot](https://raw.githubusercontent.com/cpark99/what-to-eat-v2/master/img/quiz-mobile-screenshot.jpg)
+![Mobile Screenshot](https://raw.githubusercontent.com/cpark99/ucla-quiz-app/master/img/quiz-mobile-screenshot.jpg)
 ___
 
 ##### Tablet:
-![Tablet Screenshot](https://raw.githubusercontent.com/cpark99/what-to-eat-v2/master/img/quiz-tablet-screenshot.jpg)
+![Tablet Screenshot](https://raw.githubusercontent.com/cpark99/ucla-quiz-app/master/img/quiz-tablet-screenshot.jpg)
 ___
 
 ##### Desktop:
-![Desktop Screenshot](https://raw.githubusercontent.com/cpark99/what-to-eat-v2/master/img/quiz-desktop-screenshot.png)
+![Desktop Screenshot](https://raw.githubusercontent.com/cpark99/ucla-quiz-app/master/img/quiz-desktop-screenshot.png)
 ___
